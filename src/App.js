@@ -12,22 +12,25 @@ function App() {
   
   return (
     <Box sx={{ 
-      minHeight: '100vh', 
-      padding: '2rem',
-      backgroundImage: `url(${weatherBg})`, 
-      backgroundSize: 'cover', 
-      backgroundPosition: 'center',
-      backgroundAttachment: 'fixed',
-      boxSizing: 'border-box'
-    }}>
+          minHeight: '100dvh', 
+          width: '100%',
+          backgroundImage: `url(${weatherBg})`, 
+          backgroundSize: 'cover', 
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed', 
+          padding: '2rem',
+          boxSizing: 'border-box',
+          overflowY: 'auto', 
+          overflowX: 'hidden' 
+         }}>
       <CssBaseline />
-      <Container maxWidth="sm" style={{ marginTop: '2rem', backgroundColor: 'rgba(255, 255, 255, 0.62)', backdropFilter: 'blur(5px)', padding: '2rem', borderRadius: '8px', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)' }}>
+      <Container maxWidth="sm" sx={{ marginTop: '2rem', backgroundColor: 'rgba(255, 255, 255, 0.62)', backdropFilter: 'blur(5px)', padding:{ xs: '1.5rem', sm: '3rem' }, borderRadius: '8px', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)' }}>
         
         <Typography variant="h3" align="center" gutterBottom
                     sx={{ 
                         fontFamily: "'Pacifico', cursive",
-                        fontSize: '3.5rem', 
-                        fontWeight: 400,
+                        fontSize: { xs: '3rem', sm: '4.5rem' },
+                        fontWeight: 200,
                         letterSpacing: '1px',
                         textShadow: '3px 3px 0px rgba(0,0,0,0.2)', 
                         color: 'rgba(0, 61, 102, 1)',
@@ -52,7 +55,7 @@ function App() {
 
             {weatherData && !forecastData && (
               <Box display="flex" justifyContent="center" mt={3}>
-                <Button variant="contained" color="secondary" onClick={fetchForecast}>
+                <Button variant="contained" onClick={fetchForecast} >
                   See 5-Day Prognosis
                 </Button>
               </Box>
@@ -62,7 +65,7 @@ function App() {
 
             {forecastData && (
               <Box display="flex" justifyContent="center" mt={3}>
-                <Button variant="contained" color="secondary" onClick={handleClearForecast}>
+                <Button variant="contained"  onClick={handleClearForecast}>
                   Hide Prognosis
                 </Button>
               </Box>

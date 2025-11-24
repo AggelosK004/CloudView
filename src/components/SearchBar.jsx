@@ -26,21 +26,29 @@ export default function SearchBar({ onSubmit }) {
   };
 
   return (
-    <Box display="flex" justifyContent="center" mb={2} gap={2}>
+    <Box 
+      display="flex" 
+      flexDirection={{ xs: 'column', sm: 'row' }} 
+      justifyContent="center" 
+      alignItems="center" 
+      mb={2} 
+      gap={2}
+    >
         
         <TextField
           label="Enter city"
           variant="outlined"
           value={city}
           onChange={handleInputChange}
-          onKeyDown={handleKeyDown}
-          
+          onKeyDown={handleKeyDown} 
+          sx={{ width: { xs: '100%', sm: 'auto' } }} 
         />
 
         <Button 
           variant="contained" 
           onClick={handleSearch}
-          disabled={city.trim() === ''}
+          disabled={city.trim().length === 0}
+          sx={{ width: { xs: '100%', sm: 'auto' }, height: '56px' }}
         >
           Search
         </Button>

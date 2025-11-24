@@ -10,15 +10,20 @@ export default function ForecastDisplay({ forecast }) {
 
   return (
     <Box mt={4}>
-      <Typography variant="h5" align="center" gutterBottom style={{ color: 'white' }}>
+      <Typography variant="h5" 
+                  align="center" 
+                  gutterBottom style={{ color: 'rgba(0, 47, 79, 1)' }} 
+                  fontFamily={'fantasy'} 
+                  fontWeight={50} 
+                  > 
         5-Day Prognosis
       </Typography>
       
       <Box display="flex" flexWrap="wrap" justifyContent="center" gap={2}>
         {dailyForecasts.map((day) => (
-          <Card key={day.dt} sx={{ minWidth: 100, backgroundColor: 'rgba(255, 255, 255, 0.2)', backdropFilter: 'blur(5px)' }}>
-            <CardContent style={{ textAlign: 'center', color: 'white' }}>
-              <Typography variant="body2">
+          <Card key={day.dt} sx={{ minWidth: 100, backgroundColor: 'rgba(10, 63, 137, 0.2)', backdropFilter: 'blur(5px)' }}>
+            <CardContent style={{ textAlign: 'center', color: 'black' }}>
+              <Typography variant="body2" >
                 {new Date(day.dt * 1000).toLocaleDateString(undefined, { weekday: 'short' })}
               </Typography>
               <img 

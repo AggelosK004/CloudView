@@ -1,13 +1,22 @@
 body {
   margin: 0;
+  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* 👇 1. PREVENT BOUNCE */
+  overscroll-behavior-y: none;
+
+  /* 👇 2. HIDE THE WHITE BAR (Camouflage) */
+  /* This color matches the top blue of your sky image. */
+  /* If the phone DOES bounce, users see blue sky, not a white gap. */
+  background-color: #6BB8F3; 
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html {
+  /* Ensure the camouflage extends to the whole document */
+  background-color: #6BB8F3; 
 }
