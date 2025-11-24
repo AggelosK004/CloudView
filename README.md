@@ -1,10 +1,10 @@
-# 🌤️ Weather App
+# 🌤️ CloudView
 
 A simple and responsive weather application built with React and Material UI.
 
 ## 🔗 Live Demo
 
-**Check out the website here:** 👉 **https://aggelosk004.github.io/Weather-App/**
+**Check out the website here:** 👉 **https://aggelosk004.github.io/CloudView/**
 
 ## ✨ Features
 
@@ -22,5 +22,4 @@ A simple and responsive weather application built with React and Material UI.
 ## 💻 How to Run Locally
 
 **Clone the repo**
-   git clone [https://github.com/aggelosk004/Weather-App.git]
-
+git clone [https://github.com/aggelosk004/CloudView.git]

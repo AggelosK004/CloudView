@@ -1,6 +1,6 @@
 {
-  "name": "weather-app",
-  "homepage": "https://AggelosK004.github.io/Weather-App",
+  "name": "cloudview",
+  "homepage": "https://AggelosK004.github.io/CloudView",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
