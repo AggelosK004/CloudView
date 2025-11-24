@@ -1,4 +1,3 @@
-// 1. IMPORTS
 import { useState } from 'react';
 import { TextField, Button, Box } from '@mui/material';
 
@@ -6,10 +5,8 @@ export default function SearchBar({ onSubmit }) {
 
   const [city, setCity] = useState('');
 
-  // --- INPUT VALIDATION ---
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
-    // Only allow English letters and spaces
     const regex = /^[a-zA-Z\s]*$/;
 
     if (regex.test(inputValue)) {
@@ -18,13 +15,11 @@ export default function SearchBar({ onSubmit }) {
   };
 
   const handleSearch = () => { 
-    // Double check: prevent searching if it's just spaces
     if (city.trim() !== '') {
       onSubmit(city); 
     }
   };
   const handleKeyDown = (e) => {
-    // Check if the specific key pressed was "Enter"
     if (e.key === 'Enter') {
       handleSearch();
     }
@@ -45,7 +40,6 @@ export default function SearchBar({ onSubmit }) {
         <Button 
           variant="contained" 
           onClick={handleSearch}
-          // 👇 NEW: Disable button if text is empty or just spaces
           disabled={city.trim() === ''}
         >
           Search

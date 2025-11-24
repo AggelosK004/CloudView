@@ -19,7 +19,6 @@ export default function WeatherDisplay({ weather }) {
             gap={2}
         >
             
-            {/* City Name */}
             <Typography 
                 variant="h4" 
                 sx={{ 
@@ -31,12 +30,10 @@ export default function WeatherDisplay({ weather }) {
                 {weather.name}
             </Typography>
             
-            {/* Temperature */}
             <Typography variant="h5" sx={{ whiteSpace: 'nowrap' }}>
                 {Math.round(weather.main.temp)} °C
             </Typography>
             
-            {/* Weather Icon */}
             <img src={iconUrl} alt={weather.weather[0].description} />
             
         </Box>

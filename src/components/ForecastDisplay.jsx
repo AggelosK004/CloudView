@@ -4,7 +4,6 @@ import { Box, Typography, Card, CardContent } from '@mui/material';
 export default function ForecastDisplay({ forecast }) {
   if (!forecast) return null;
 
-  // Filter to get only one reading per day (e.g., at 12:00 PM)
   const dailyForecasts = forecast.list.filter(reading => 
     reading.dt_txt.includes("12:00:00")
   );

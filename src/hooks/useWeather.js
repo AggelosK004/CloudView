@@ -1,4 +1,3 @@
-// src/hooks/useWeather.js
 import { useState } from 'react';
 import { getWeather, getForecast } from '../services/WeatherService';
 
@@ -12,7 +11,7 @@ export function useWeather() {
     setLoading(true);
     setError(null);
     setWeatherData(null);
-    setForecastData(null); // Clear old forecast
+    setForecastData(null); 
 
     try {
       const data = await getWeather(city);
