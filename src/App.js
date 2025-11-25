@@ -1,15 +1,18 @@
-import React from 'react';
-import { Box, Container, Typography, CircularProgress, Alert, Button, CssBaseline } from '@mui/material'; 
-import SearchBar from './components/SearchBar';
-import WeatherDisplay from './components/WeatherDisplay';
-import ForecastDisplay from './components/ForecastDisplay';
+import React, { useState } from 'react';
+import { Box, CssBaseline, Button } from '@mui/material'; 
+import { Menu as MenuIcon } from '@mui/icons-material';
+import FavoritesDrawer from './components/FavoritesDrawer';
+import WeatherDashboard from './components/WeatherDashboard';
+import Footer from './components/Footer'; 
 import weatherBg from './assets/wp11789974.jpg'; 
 import { useWeather } from './hooks/useWeather';
+import { useFavorites } from './hooks/useFavorites';
 
 function App() {
-  
-  const { weatherData, forecastData, loading, error, fetchWeather, fetchForecast, handleClearForecast } = useWeather();
-  
+  const weatherHook = useWeather();
+  const favoritesHook = useFavorites();
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
   return (
     <Box sx={{ 
           minHeight: '100dvh', 
@@ -21,59 +24,47 @@ function App() {
           padding: '2rem',
           boxSizing: 'border-box',
           overflowY: 'auto', 
-          overflowX: 'hidden' 
-         }}>
+          overflowX: 'hidden',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
+    }}>
       <CssBaseline />
-      <Container maxWidth="sm" sx={{ marginTop: '2rem', backgroundColor: 'rgba(255, 255, 255, 0.62)', backdropFilter: 'blur(5px)', padding:{ xs: '1.5rem', sm: '3rem' }, borderRadius: '8px', boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)' }}>
-        
-        <Typography variant="h3" align="center" gutterBottom
-                    sx={{ 
-                        fontFamily: "'Pacifico', cursive",
-                        fontSize: { xs: '3rem', sm: '4.5rem' },
-                        fontWeight: 200,
-                        letterSpacing: '1px',
-                        textShadow: '3px 3px 0px rgba(0,0,0,0.2)', 
-                        color: 'rgba(0, 61, 102, 1)',
-                        }} 
-                        >CloudView</Typography>
-        
-        <SearchBar onSubmit={fetchWeather} /> 
 
-        {error && (
-          <Box mt={2} mb={2}>
-            <Alert severity="error">{error}</Alert>
-          </Box>
-        )}
+      <Box position="absolute" top={20} left={20} zIndex={10}>
+        <Button 
+            variant="contained"
+            startIcon={<MenuIcon />}
+            onClick={() => setIsDrawerOpen(true)}
+            sx={{ 
+              backgroundColor: 'rgba(255,255,255,0.8)', 
+              color: 'rgba(0, 61, 102, 1)',
+              fontWeight: 'bold',
+              '&:hover': { backgroundColor: 'white' } 
+            }}
+        >
+            Favorites
+        </Button>
+      </Box>
 
-        {loading ? (
-          <Box display="flex" justifyContent="center" mt={4}>
-            <CircularProgress />
-          </Box>
-        ) : (
-          <>
-            <WeatherDisplay weather={weatherData} />
+      <FavoritesDrawer 
+        open={isDrawerOpen} 
+        onClose={() => setIsDrawerOpen(false)}
+        favorites={favoritesHook.favorites}
+        onSelectCity={(city) => {
+            weatherHook.fetchWeather(city); 
+            setIsDrawerOpen(false);
+        }}
+        onRemoveCity={favoritesHook.removeFavorite}
+      />
 
-            {weatherData && !forecastData && (
-              <Box display="flex" justifyContent="center" mt={3}>
-                <Button variant="contained" onClick={fetchForecast} >
-                  See 5-Day Prognosis
-                </Button>
-              </Box>
-            )}
-            
-            <ForecastDisplay forecast={forecastData} />
+      <WeatherDashboard 
+        weatherHook={weatherHook} 
+        favoritesHook={favoritesHook} 
+      />
 
-            {forecastData && (
-              <Box display="flex" justifyContent="center" mt={3}>
-                <Button variant="contained"  onClick={handleClearForecast}>
-                  Hide Prognosis
-                </Button>
-              </Box>
-            )}
-          </>
-        )}
+      <Footer />
 
-      </Container>
     </Box>
   );
 }
