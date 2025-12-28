@@ -1,14 +1,15 @@
 {
   "files": {
-    "main.css": "/CloudView/static/css/main.31d6cfe0.css",
-    "main.js": "/CloudView/static/js/main.000cfafb.js",
+    "main.css": "/CloudView/static/css/main.2c0b54b3.css",
+    "main.js": "/CloudView/static/js/main.6d564c86.js",
     "static/js/453.562b8d6c.chunk.js": "/CloudView/static/js/453.562b8d6c.chunk.js",
     "index.html": "/CloudView/index.html",
-    "main.000cfafb.js.map": "/CloudView/static/js/main.000cfafb.js.map",
+    "main.2c0b54b3.css.map": "/CloudView/static/css/main.2c0b54b3.css.map",
+    "main.6d564c86.js.map": "/CloudView/static/js/main.6d564c86.js.map",
     "453.562b8d6c.chunk.js.map": "/CloudView/static/js/453.562b8d6c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.31d6cfe0.css",
-    "static/js/main.000cfafb.js"
+    "static/css/main.2c0b54b3.css",
+    "static/js/main.6d564c86.js"
   ]
 }
