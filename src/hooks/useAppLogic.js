@@ -25,7 +25,8 @@ export function useAppLogic() {
         },
         (error) => {
           console.log("Auto-location skipped:", error.message);
-        }
+        },
+        { enableHighAccuracy: false, timeout: 10000, maximumAge: 0 }
       );
     }
   }, []);
@@ -87,13 +88,12 @@ export function useAppLogic() {
   const closeSnackbar = () => setSnackbar({ ...snackbar, open: false });
 
   const bgColors = useMemo(() => {
-    // Default Empty State
     if (!weatherData) return { top: "#0f172a", bottom: "#1d4ed8" };
 
     const id = weatherData.weather[0].id;
     const isNight = weatherData.weather[0].icon.includes("n");
 
-    // === 🌑 NIGHT PALETTES (Darker, Moodier) ===
+    // === NIGHT PALETTES (Darker, Moodier) ===
     if (isNight) {
       // Night Thunder: Pitch Black -> Deep Purple
       if (id >= 200 && id < 300) return { top: "#0f0518", bottom: "#581c87" };
@@ -117,7 +117,7 @@ export function useAppLogic() {
       return { top: "#0f172a", bottom: "#535172ff" };
     }
 
-    // === ☀️ DAY PALETTES (Vibrant, High Contrast) ===
+    // === DAY PALETTES (Vibrant, High Contrast) ===
 
     // Thunder: Midnight Blue -> Electric Violet
     if (id >= 200 && id < 300) return { top: "#1e1b4b", bottom: "#7c3aed" };
@@ -143,6 +143,13 @@ export function useAppLogic() {
     // Fallback
     return { top: "#1e3a8a", bottom: "#3b82f6" };
   }, [weatherData]);
+
+  useEffect(() => {
+    const metaThemeColor = document.querySelector("meta[name='theme-color']");
+    if (metaThemeColor && bgColors) {
+      metaThemeColor.setAttribute("content", bgColors.bottom);
+    }
+  }, [bgColors]);
 
   return {
     state: {
