@@ -1,44 +1,22 @@
 const API_KEY = process.env.REACT_APP_API_KEY;
-const BASE_URL = 'https://api.openweathermap.org/data/2.5';
-
-export const getWeather = async (city) => {
-  if (!API_KEY) {
-    throw new Error("API Key is missing! Check your .env file.");
-  }
-
-  const url = `${BASE_URL}/weather?q=${city}&appid=${API_KEY}&units=metric`;
-
-  const response = await fetch(url);
-  const data = await response.json();
-
-  if (data.cod === '404' || data.cod === 404) {
-    throw new Error("City not found. Please try again.");
-  }
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch current weather.");
-  }
-
-  return data;
+const BASE_URL = "https://api.openweathermap.org/data/2.5";
+export const getWeather = async city => {
+  const response = await fetch(`${BASE_URL}/weather?q=${city}&units=metric&appid=${API_KEY}`);
+  if (!response.ok) throw new Error(response.status === 404 ? "City not found" : "Failed to fetch weather");
+  return response.json();
 };
-
-export const getForecast = async (city) => {
-  if (!API_KEY) {
-    throw new Error("API Key is missing! Check your .env file.");
-  }
-
-  const url = `${BASE_URL}/forecast?q=${city}&appid=${API_KEY}&units=metric`;
-
-  const response = await fetch(url);
-  const data = await response.json();
-
-  if (data.cod === '404' || data.cod === 404) {
-    throw new Error("City not found for forecast.");
-  }
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch forecast data.");
-  }
-
-  return data;
+export const getForecast = async city => {
+  const response = await fetch(`${BASE_URL}/forecast?q=${city}&units=metric&appid=${API_KEY}`);
+  if (!response.ok) throw new Error("Failed to fetch forecast");
+  return response.json();
+};
+export const getWeatherByCoords = async (lat, lon) => {
+  const response = await fetch(`${BASE_URL}/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`);
+  if (!response.ok) throw new Error("Could not fetch weather for this location");
+  return response.json();
+};
+export const getForecastByCoords = async (lat, lon) => {
+  const response = await fetch(`${BASE_URL}/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`);
+  if (!response.ok) throw new Error("Could not fetch forecast for this location");
+  return response.json();
 };
